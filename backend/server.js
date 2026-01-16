@@ -26,7 +26,8 @@ if (store.getRawVersions().length === 0) {
 app.use(configRoutes);
 
 
-const PORT = 5050;
+const PORT = process.env.PORT || 5050;
+
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend running on http://localhost:${PORT}`);
