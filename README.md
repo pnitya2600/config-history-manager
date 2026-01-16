@@ -59,111 +59,173 @@ config-history-manager/
 
 🔧 Backend Design
 Versioning Model
+
 Each configuration save creates a new immutable version
+
 Versions are uniquely identified using UUIDs
+
 Versions are timestamped and ordered by creation time
+
 Older versions remain accessible and unchanged
+
 Each version stores:
 
 Full configuration snapshot
+
 Diff from the previous version
+
 Metadata (timestamp, optional comment)
+
 Context-Aware Saves
+
 When saving a new configuration:
 
 The backend fetches the latest version
+
 Computes a diff against the new configuration
+
 Rejects the save if no changes are detected (stale save)
+
 Persists a new immutable version otherwise
+
 This ensures saves are context-aware, not blind overwrites.
 
 Diff Strategy
-Diffs are computed using jsondiffpatch
-Field-level detection:
-Added fields
-Removed fields
-Modified values
-Nested object changes are fully supported
-Array strategy: index-based comparison
 
+Diffs are computed using jsondiffpatch
+
+Field-level detection:
+
+Added fields
+
+Removed fields
+
+Modified values
+
+Nested object changes are fully supported
+
+Array strategy: index-based comparison
 (This was chosen for simplicity and predictability and is explicitly defined)
+
 Persistence Choice
+
 Strategy used: Full snapshots + diffs (hybrid)
 
 Justification:
 
 Simple to reason about and debug
-Easy to restore older versions
-Efficient enough for the required constraints (~1MB JSON, ~100 versions)
-Avoids complexity of reconstructing state from chained diffs
-Backend APIs
-MethodEndpointDescriptionGET/configFetch latest configurationPOST/config/saveSave new versionGET/config/versionsList all versionsGET/config/diff?from=&to=Compute diff between two versions
 
+Easy to restore older versions
+
+Efficient enough for the required constraints (~1MB JSON, ~100 versions)
+
+Avoids complexity of reconstructing state from chained diffs
+
+Backend APIs
+Method	Endpoint	Description
+GET	/config	Fetch latest configuration
+POST	/config/save	Save new version
+GET	/config/versions	List all versions
+GET	/config/diff?from=&to=	Compute diff between two versions
 🎨 Frontend Design
 Configuration Editor
-Dynamically renders configuration from JSON
-Allows editing and saving
-No field-specific logic or JSX
-Works for any configuration shape
-Version History View
-Lists all saved versions
-Displays version ID and timestamp
-Allows selecting two versions for comparison
-Diff-Based UI
-Visual comparison between two versions
-Clear highlighting of:
-🟢 Added values
-🔴 Removed values
-🟡 Modified values
-Nested diffs are readable
-Uses jsondiffpatch HTML formatter
-No hardcoded assumptions about schema
-🚫 No Hardcoding
-UI logic is completely data-driven
-No field names or schema assumptions
-Works for arbitrary JSON configurations
-⚙️ Non-Functional Considerations
-Clear separation of concerns (API, storage, diff logic, UI)
-Predictable state management
-Designed to handle:
-~1MB JSON payloads
-~100 versions
-Clean, readable, and maintainable code
-⭐ Bonus Features
-Stale save detection
 
+Dynamically renders configuration from JSON
+
+Allows editing and saving
+
+No field-specific logic or JSX
+
+Works for any configuration shape
+
+Version History View
+
+Lists all saved versions
+
+Displays version ID and timestamp
+
+Allows selecting two versions for comparison
+
+Diff-Based UI
+
+Visual comparison between two versions
+
+Clear highlighting of:
+
+🟢 Added values
+
+🔴 Removed values
+
+🟡 Modified values
+
+Nested diffs are readable
+
+Uses jsondiffpatch HTML formatter
+
+No hardcoded assumptions about schema
+
+🚫 No Hardcoding
+
+UI logic is completely data-driven
+
+No field names or schema assumptions
+
+Works for arbitrary JSON configurations
+
+⚙️ Non-Functional Considerations
+
+Clear separation of concerns (API, storage, diff logic, UI)
+
+Predictable state management
+
+Designed to handle:
+
+~1MB JSON payloads
+
+~100 versions
+
+Clean, readable, and maintainable code
+
+⭐ Bonus Features
+
+Stale save detection
 Saves are rejected if no changes are detected, avoiding unnecessary version creation.
+
 (Restore previous version via UI was considered but not implemented, as it was marked optional.)
 
 🚀 Running the Project Locally
 Backend
-
 cd backend
 npm install
 npm run dev
-﻿
+
+
 Backend runs on:
 
-
 http://localhost:5050
-﻿
-Frontend
 
+Frontend
 cd frontend
 npm install
 npm run dev
-﻿
+
+
 Frontend runs on:
 
-
 http://localhost:5174
-﻿
+
 🧠 Summary
+
 This project demonstrates:
 
 A practical versioning strategy
+
 Correct diff semantics
+
 Thoughtful backend design
+
 Dynamic, schema-agnostic frontend rendering
+
 Clear reasoning about trade-offs and constraints
+
 The solution is intentionally simple, correct, and extensible, focusing on engineering judgment over unnecessary complexity.
