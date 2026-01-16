@@ -33,6 +33,7 @@ This project fulfills the following goals:
 🏗️ Architecture
 ----------------
 
+```text
 config-history-manager/
 ├── backend/
 │   ├── server.js
