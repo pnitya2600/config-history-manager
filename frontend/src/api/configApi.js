@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:5050";
+const API_BASE = "https://config-history-manager.onrender.com";
+
 
 
 export const getConfig = () =>
