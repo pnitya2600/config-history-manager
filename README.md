@@ -33,7 +33,27 @@ This project fulfills the following goals:
 🏗️ Architecture
 ----------------
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML`   config-history-manager/  ├── backend/  │   ├── server.js  │   ├── routes/  │   │   └── configRoutes.js  │   ├── data/  │   │   ├── store.js  │   │   └── initialConfig.js  │   └── utils/  │       └── diff.js  ├── frontend/  │   ├── src/  │   │   ├── api/  │   │   │   └── configApi.js  │   │   ├── components/  │   │   │   ├── ConfigEditor.jsx  │   │   │   ├── VersionHistory.jsx  │   │   │   └── DiffViewer.jsx  │   │   └── styles/  │   │       └── jsondiffpatch.css  └── README.md   `
+config-history-manager/
+├── backend/
+│   ├── server.js
+│   ├── routes/
+│   │   └── configRoutes.js
+│   ├── data/
+│   │   ├── store.js
+│   │   └── initialConfig.js
+│   └── utils/
+│       └── diff.js
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   │   └── configApi.js
+│   │   ├── components/
+│   │   │   ├── ConfigEditor.jsx
+│   │   │   ├── VersionHistory.jsx
+│   │   │   └── DiffViewer.jsx
+│   │   └── styles/
+│   │       └── jsondiffpatch.css
+└── README.md
 
 🔧 Backend Design
 -----------------
