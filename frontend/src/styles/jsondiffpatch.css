@@ -1,0 +1,24 @@
+.jsondiffpatch-delta {
+  font-family: monospace;
+  font-size: 13px;
+}
+
+.jsondiffpatch-added {
+  background: #e6ffed;
+}
+
+.jsondiffpatch-deleted {
+  background: #ffeef0;
+}
+
+.jsondiffpatch-modified {
+  background: #fff5b1;
+}
+
+.jsondiffpatch-property-name {
+  font-weight: bold;
+}
+
+.jsondiffpatch-value {
+  padding-left: 10px;
+}
